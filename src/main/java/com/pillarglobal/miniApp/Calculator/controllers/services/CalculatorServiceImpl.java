@@ -1,8 +1,6 @@
 package com.pillarglobal.miniApp.Calculator.controllers.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Stack;
 
 @Service
@@ -26,53 +24,45 @@ public class CalculatorServiceImpl implements CalculatorService {
                     stringBuffer.append(characters[i++]);
                 numbers.push(Integer.parseInt(stringBuffer.toString()));
                 i--;
-            } else if (characters[i] == '(')
-                operators.push(characters[i]);
-              else if (characters[i] == ')') {
-                while (operators.peek() != '(')
-                    numbers.push(applyOperations(operators.pop(),
-                            numbers.pop(),
-                            numbers.pop()));
             }
+//            else if (characters[i] == '(')
+//                operators.push(characters[i]);
+//            else if (characters[i] == ')') {
+//                while (operators.peek() != '(')
+//                    numbers.push(applyOperations(operators.pop(),
+//                            numbers.pop(),
+//                            numbers.pop()));
+//            }
 
               else if (characters[i] == '+' ||
                         characters[i] == '-' ||
                         characters[i] == '*' ||
                         characters[i] == '/')
-            { while (!operators.empty() &&
-                    hasPrecedence(characters[i],
-                            operators.peek()))
-                numbers.push(applyOperations(operators.pop(),
-                        numbers.pop(),
-                        numbers.pop()));
+            {
+                while (!operators.empty() && hasPrecedence(characters[i], operators.peek()))
+                numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
 
                 operators.push(characters[i]);
             }
         }
 
         while (!operators.empty())
-            numbers.push(applyOperations(operators.pop(),
-                    numbers.pop(),
-                    numbers.pop()));
+            numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
 
         return numbers.pop();
     }
 
-    public static boolean hasPrecedence(char op1, char op2)
-    {
-        if (op2 == '(' || op2 == ')')
-            return false;
-        if ((op1 == '*' || op1 == '/') &&
-                (op2 == '+' || op2 == '-'))
+    public static boolean hasPrecedence(char operator_1, char operator_2) {
+//        if (operator_2 == '(' || operator_2 == ')')
+//            return false;
+        if ((operator_1 == '*' || operator_1 == '/') && (operator_2 == '+' || operator_2 == '-'))
             return false;
         else
             return true;
     }
 
-    public static int applyOperations(char op, int b, int a)
-    {
-        switch (op)
-        {
+    public static int applyOperations(char operator, int a, int b) {
+        switch (operator) {
             case '+':
                 return a + b;
             case '-':
