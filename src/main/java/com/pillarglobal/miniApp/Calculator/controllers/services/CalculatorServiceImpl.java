@@ -1,6 +1,7 @@
 package com.pillarglobal.miniApp.Calculator.controllers.services;
 
 import org.springframework.stereotype.Service;
+
 import java.util.Stack;
 
 @Service
@@ -20,7 +21,8 @@ public class CalculatorServiceImpl implements CalculatorService {
             if (characters[i] >= '0' && characters[i] <= '9') {
                 StringBuffer stringBuffer = new StringBuffer();
 
-                while (i < characters.length && characters[i] >= '0' && characters[i] <= '9')
+                while
+                (i < characters.length && characters[i] >= '0' && characters[i] <= '9')
                     stringBuffer.append(characters[i++]);
                 numbers.push(Integer.parseInt(stringBuffer.toString()));
                 i--;
@@ -34,21 +36,19 @@ public class CalculatorServiceImpl implements CalculatorService {
 //                            numbers.pop()));
 //            }
 
-              else if (characters[i] == '+' ||
-                        characters[i] == '-' ||
-                        characters[i] == '*' ||
-                        characters[i] == '/')
-            {
-                while (!operators.empty() && hasPrecedence(characters[i], operators.peek()))
-                numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
-
+            else if (characters[i] == '+' ||
+                    characters[i] == '-' ||
+                    characters[i] == '*' ||
+                    characters[i] == '/') {
+                while
+                (!operators.empty() && hasPrecedence(characters[i], operators.peek()))
+                    numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
                 operators.push(characters[i]);
             }
         }
 
         while (!operators.empty())
             numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
-
         return numbers.pop();
     }
 
@@ -66,7 +66,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             case '+':
                 return a + b;
             case '-':
-                return a - b;
+                return b - a;
             case '*':
                 return a * b;
             case '/':
