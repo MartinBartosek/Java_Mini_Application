@@ -19,24 +19,20 @@ public class CalculatorServiceImpl implements CalculatorService {
             }
 
             if (characters[i] >= '0' && characters[i] <= '9') {
-                StringBuffer stringBuffer = new StringBuffer();
+                StringBuilder stringBuffer = new StringBuilder();
 
                 while
                 (i < characters.length && characters[i] >= '0' && characters[i] <= '9')
                     stringBuffer.append(characters[i++]);
                 numbers.push(Integer.parseInt(stringBuffer.toString()));
                 i--;
-            }
-//            else if (characters[i] == '(')
-//                operators.push(characters[i]);
-//            else if (characters[i] == ')') {
-//                while (operators.peek() != '(')
-//                    numbers.push(applyOperations(operators.pop(),
-//                            numbers.pop(),
-//                            numbers.pop()));
-//            }
-
-            else if (characters[i] == '+' ||
+            } else if (characters[i] == '(')
+                operators.push(characters[i]);
+            else if (characters[i] == ')') {
+                while (operators.peek() != '(')
+                    numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
+                operators.pop();
+            } else if (characters[i] == '+' ||
                     characters[i] == '-' ||
                     characters[i] == '*' ||
                     characters[i] == '/') {
@@ -53,8 +49,8 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     public static boolean hasPrecedence(char operator_1, char operator_2) {
-//        if (operator_2 == '(' || operator_2 == ')')
-//            return false;
+        if (operator_2 == '(' || operator_2 == ')')
+            return false;
         if ((operator_1 == '*' || operator_1 == '/') && (operator_2 == '+' || operator_2 == '-'))
             return false;
         else
