@@ -1,5 +1,6 @@
 package com.pillarglobal.miniApp.Calculator.controllers.services;
 
+import com.pillarglobal.miniApp.Calculator.exceptions.MultipleOperatorException;
 import org.springframework.stereotype.Service;
 
 import java.util.Stack;
@@ -7,7 +8,7 @@ import java.util.Stack;
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
-    public Integer calculate(String expression) throws IllegalArgumentException {
+    public Integer calculate(String expression) throws MultipleOperatorException {
 
         char[] characters = expression.toCharArray();
         Stack<Integer> numbers = new Stack<Integer>();
@@ -48,9 +49,9 @@ public class CalculatorServiceImpl implements CalculatorService {
         return numbers.pop();
     }
 
-    public static boolean checkOperatorDuplicities(char currentOperator, char stackOperator) throws IllegalArgumentException {
+    public static boolean checkOperatorDuplicities(char currentOperator, char stackOperator) throws MultipleOperatorException {
         if (currentOperator == stackOperator) {
-            throw new IllegalArgumentException("You cannot use more operators in a row !!!");
+            throw new MultipleOperatorException("You cannot use more operators in a row !!!");
         }
         return true;
     }
