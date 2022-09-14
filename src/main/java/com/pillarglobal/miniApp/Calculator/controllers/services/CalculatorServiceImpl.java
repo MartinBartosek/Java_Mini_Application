@@ -7,7 +7,7 @@ import java.util.Stack;
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
-    public Integer calculate(String expression) {
+    public Integer calculate(String expression) throws IllegalArgumentException {
 
         char[] characters = expression.toCharArray();
         Stack<Integer> numbers = new Stack<Integer>();
@@ -37,7 +37,7 @@ public class CalculatorServiceImpl implements CalculatorService {
                     characters[i] == '*' ||
                     characters[i] == '/') {
                 while
-                (!operators.empty() && hasPrecedence(characters[i], operators.peek()))
+                (!operators.empty() && hasPrecedence(characters[i], operators.peek()) && checkOperatorDuplicities(characters[i], operators.peek()))
                     numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
                 operators.push(characters[i]);
             }
@@ -46,6 +46,13 @@ public class CalculatorServiceImpl implements CalculatorService {
         while (!operators.empty())
             numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
         return numbers.pop();
+    }
+
+    public static boolean checkOperatorDuplicities(char currentOperator, char stackOperator) throws IllegalArgumentException {
+        if (currentOperator == stackOperator) {
+            throw new IllegalArgumentException("You cannot use more operators in a row !!!");
+        }
+        return true;
     }
 
     public static boolean hasPrecedence(char operator_1, char operator_2) {
