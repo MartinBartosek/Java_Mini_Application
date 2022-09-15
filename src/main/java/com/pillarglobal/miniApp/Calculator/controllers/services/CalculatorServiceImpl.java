@@ -36,7 +36,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             } else if (characters[i] == '+' ||
                     characters[i] == '-' ||
                     characters[i] == '*' ||
-                    characters[i] == '/') {
+                    characters[i] == ':') {
                 while
                 (!operators.empty() && hasPrecedence(characters[i], operators.peek()) && checkOperatorDuplicities(characters[i], operators.peek()))
                     numbers.push(applyOperations(operators.pop(), numbers.pop(), numbers.pop()));
@@ -51,7 +51,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 
     public static boolean checkOperatorDuplicities(char currentOperator, char stackOperator) throws MultipleOperatorException {
         if (currentOperator == stackOperator) {
-            throw new MultipleOperatorException("You cannot use more operators in a row !!!");
+            throw new MultipleOperatorException("You cannot use the same operator more than one time in a row !!!");
         }
         return true;
     }
@@ -59,7 +59,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     public static boolean hasPrecedence(char operator_1, char operator_2) {
         if (operator_2 == '(' || operator_2 == ')')
             return false;
-        if ((operator_1 == '*' || operator_1 == '/') && (operator_2 == '+' || operator_2 == '-'))
+        if ((operator_1 == '*' || operator_1 == ':') && (operator_2 == '+' || operator_2 == '-'))
             return false;
         else
             return true;
@@ -73,12 +73,12 @@ public class CalculatorServiceImpl implements CalculatorService {
                 return b - a;
             case '*':
                 return a * b;
-            case '/':
+            case ':':
                 if (b == 0)
                     throw new
                             UnsupportedOperationException(
                             "Cannot divide by zero");
-                return a / b;
+                return b / a;
         }
         return 0;
     }
