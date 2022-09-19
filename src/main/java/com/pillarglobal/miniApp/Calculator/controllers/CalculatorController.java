@@ -15,6 +15,6 @@ public static final String CALCULATOR_CALCULATE_EXPRESSION = "/calculate/{expres
 
 @GetMapping(path = CALCULATOR_CALCULATE_EXPRESSION)
 public Integer calculateExpression(@PathVariable String expression) throws MultipleOperatorException {
-    return calculatorService.calculate(expression);
+    return calculatorService.solveExpression(expression);
     }
 }

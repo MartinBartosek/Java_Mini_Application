@@ -8,16 +8,13 @@ import java.util.Stack;
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
 
-    public Integer calculate(String expression) throws MultipleOperatorException {
+    public Integer solveExpression(String expression) throws MultipleOperatorException {
 
         char[] characters = expression.toCharArray();
         Stack<Integer> numbers = new Stack<Integer>();
         Stack<Character> operators = new Stack<Character>();
 
         for (int i = 0; i < characters.length; i++) {
-            if (characters[i] == ' ') {
-                continue;
-            }
 
             if (characters[i] >= '0' && characters[i] <= '9') {
                 StringBuilder stringBuffer = new StringBuilder();
