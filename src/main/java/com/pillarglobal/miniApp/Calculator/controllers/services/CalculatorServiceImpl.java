@@ -49,18 +49,18 @@ public class CalculatorServiceImpl implements CalculatorService {
         return numbers.pop();
     }
 
-    public static boolean checkOperatorDuplicities(char currentOperator, char stackOperator) throws MultipleOperatorException {
-        if (currentOperator == stackOperator) {
+    public static boolean checkOperatorDuplicities(char currentOperator, char anyStackOperator) throws MultipleOperatorException {
+        if (currentOperator == anyStackOperator) {
             throw new MultipleOperatorException("You cannot use the same operator more than one time in a row !!!");
         }
         return true;
     }
 
-    public static boolean hasPrecedence(char operator_1, char operator_2) {
-        if (operator_2 == '(' || operator_2 == ')')
+    public static boolean hasPrecedence(char currentOperator, char stackOperator) {
+        if (stackOperator == '(' || stackOperator == ')')
             return false;
-        if ((operator_1 == '*' || operator_1 == ':') && (operator_2 == '+' || operator_2 == '-'))
-            return false;
+        if ((currentOperator == '*' || currentOperator == ':') && (stackOperator == '+' || stackOperator == '-'))
+            return true;
         else
             return true;
     }
