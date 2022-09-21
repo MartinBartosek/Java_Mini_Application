@@ -57,7 +57,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         if (stackOperator == '(' || stackOperator == ')')
             return false;
         if ((currentOperator == '*' || currentOperator == ':') && (stackOperator == '+' || stackOperator == '-'))
-            return true;
+            return false;
         else
             return true;
     }
@@ -71,7 +71,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             case '*':
                 return a * b;
             case ':':
-                if (b == 0)
+                if (a == 0)
                     throw new
                             UnsupportedOperationException(
                             "Cannot divide by zero");
