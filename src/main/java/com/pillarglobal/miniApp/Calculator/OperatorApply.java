@@ -1,5 +1,8 @@
 package com.pillarglobal.miniApp.Calculator;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class OperatorApply {
 
     public int applyOperations(char operator, int a, int b) {

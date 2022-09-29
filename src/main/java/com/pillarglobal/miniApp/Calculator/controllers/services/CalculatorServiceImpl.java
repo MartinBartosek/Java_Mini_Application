@@ -4,11 +4,14 @@ import com.pillarglobal.miniApp.Calculator.OperatorApply;
 import com.pillarglobal.miniApp.Calculator.OperatorDuplicitiesCheck;
 import com.pillarglobal.miniApp.Calculator.PrecedenceCheck;
 import com.pillarglobal.miniApp.Calculator.exceptions.MultipleOperatorException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Stack;
 
 @Service
+@AllArgsConstructor
 public class CalculatorServiceImpl implements CalculatorService {
 
     public PrecedenceCheck precedenceCheck;

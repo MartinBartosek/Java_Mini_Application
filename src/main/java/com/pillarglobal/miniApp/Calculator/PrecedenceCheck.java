@@ -1,5 +1,8 @@
 package com.pillarglobal.miniApp.Calculator;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PrecedenceCheck {
 
     public boolean hasPrecedence(char currentOperator, char stackOperator) {
